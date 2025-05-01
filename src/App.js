@@ -1,25 +1,63 @@
 import logo from './logo.svg';
+import {useState} from 'react';
 import './App.css';
 
 function App() {
+  const [tableData, setTableData] = useState([
+    { rmaNumber: '', chassyNumber: '', serialNumber: '' },]);
+  const addRow = () => {
+    setTableData([...tableData, {rmaNumber: '', chassyNumber: '', serialNumber: ''}]);
+  };
+  const handleInputChange = (index, field, value) => {
+    const updatedTableData = [...tableData];
+    updatedTableData[index][field] = value;
+    setTableData(updatedTableData);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header>
+        <h1>Analyzer Check List</h1>
       </header>
-    </div>
+      <button onClick={addRow}>Add Row</button>
+      <main>
+        <table>
+          <thead>
+            <tr>
+              <th>RMA Number</th>
+              <th>Chassy Number</th>
+              <th>Serial Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableData.map((row, index) => (
+              <tr key={index}>
+                <td>
+                  <input
+                    type="text"
+                    value={row.rmaNumber}
+                    onChange={(e) => handleInputChange(index, 'rmaNumber', e.target.value)}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value={row.chassyNumber}
+                    onChange={(e) => handleInputChange(index, 'chassyNumber', e.target.value)}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value={row.serialNumber}
+                    onChange={(e) => handleInputChange(index, 'serialNumber', e.target.value)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
+    </>
   );
 }
-
 export default App;
