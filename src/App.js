@@ -1,16 +1,22 @@
 import logo from './logo.svg';
 import {useState} from 'react';
 import './App.css';
+import DropDownList from './Components/DropDownList';
 
 function App() {
   const [tableData, setTableData] = useState([
-    { rmaNumber: '', chassyNumber: '', serialNumber: '' },]);
+    { rmaNumber: '', chassyNumber: '', serialNumber: '', dropdownValue: ''}]);
   const addRow = () => {
-    setTableData([...tableData, {rmaNumber: '', chassyNumber: '', serialNumber: ''}]);
+    setTableData([...tableData, {rmaNumber: '', chassyNumber: '', serialNumber: '', dropdownValue: ''}]);
   };
   const handleInputChange = (index, field, value) => {
     const updatedTableData = [...tableData];
     updatedTableData[index][field] = value;
+    setTableData(updatedTableData);
+  };
+  const handleDropdownChange = (index, value) => {
+    const updatedTableData = [...tableData];
+    updatedTableData[index].dropdownValue = value;
     setTableData(updatedTableData);
   };
   return (
@@ -26,6 +32,7 @@ function App() {
               <th>RMA Number</th>
               <th>Chassy Number</th>
               <th>Serial Number</th>
+              <th>Tasks</th>
             </tr>
           </thead>
           <tbody>
@@ -50,6 +57,13 @@ function App() {
                     type="text"
                     value={row.serialNumber}
                     onChange={(e) => handleInputChange(index, 'serialNumber', e.target.value)}
+                  />
+                </td>
+                <td>
+                  <DropDownList
+                    value={row.dropdownValue}
+                    // onChange={(value) => handleInputChange(index, 'dropdownValue', value)}
+                    onChange={(value) => handleDropdownChange(index, value)}
                   />
                 </td>
               </tr>
