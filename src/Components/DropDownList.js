@@ -15,14 +15,22 @@ const LIST_ITEMS = [
 
 const DropDownList = ({value, onChange}) => {
     return (
-        <select value={value} onChange={(e) => onChange(e.target.value)}>
-            <option value="">Select options</option>
-            {LIST_ITEMS.map((item)=>(
-                <option key={item.id} value={item.name}>
-                    {item.name}
-                </option>
-            ))}
-        </select>
+        <div className="selectBox">
+            <div className="checkBoxes">
+                {LIST_ITEMS.map((item) => (
+                    <label key={item.id} htmlFor={`checkbox-${item.id}`}>
+                        <input
+                            type="checkbox"
+                            id={`checkbox-${item.id}`}
+                            name={item.name}
+                            value={item.name}
+                            onChange={(e) => onChange(e.target.value)}
+                        />
+                        {item.name}
+                    </label>
+                ))}
+            </div>
+        </div>
     );
 };
 
