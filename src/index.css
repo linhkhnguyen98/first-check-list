@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +10,15 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+.dropdown-list {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  gap: 5px; /* Add spacing between items */
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center; /* Align checkbox and label */
+  gap: 5px; /* Add spacing between checkbox and label */
 }
